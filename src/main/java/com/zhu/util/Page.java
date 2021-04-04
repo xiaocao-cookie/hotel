@@ -22,6 +22,7 @@ public class Page {
     private List<Order> orderList;
     private List<Notice> noticeList;
 
+
     public void setTotalCount(int totalCount) {
         if(totalCount > 0){
             this.totalCount = totalCount;
