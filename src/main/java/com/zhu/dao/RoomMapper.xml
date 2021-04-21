@@ -9,6 +9,11 @@
         INSERT INTO `hotel_room`(`rname`, `rtype`, `status`, `rstyle`, `picPath`, `rfloor`)
         VALUES (#{rname}, #{rtype}, #{status}, #{rstyle}, '035.jpg', #{rfloor});
     </insert>
+    <update id="updateRoom">
+        UPDATE `hotel_room`
+        SET `rname` = #{rname}, `rtype` = #{rtype}, `status` = #{status}, `rstyle` = #{rstyle}, `picPath` = #{picPath}, `rfloor` = #{rfloor}
+        WHERE `rno` = #{rno};
+    </update>
     <delete id="deleteRoomById">
         DELETE FROM `hotel_room` WHERE rno = #{rno}
     </delete>
@@ -60,5 +65,8 @@
     </select>
     <select id="verifyRoomName" resultType="com.zhu.entity.Room">
         SELECT * FROM hotel_room WHERE rname = #{rname}
+    </select>
+    <select id="queryRoomByRno" resultType="com.zhu.entity.Room">
+        SELECT * FROM `hotel_room` WHERE rno = #{rno}
     </select>
 </mapper>

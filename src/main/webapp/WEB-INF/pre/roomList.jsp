@@ -79,16 +79,9 @@
                         <c:if test="${room.rfloor == 2}">二层</c:if>
                         <c:if test="${room.rfloor == 3}">三层</c:if><br/>
                     <span style="font-size: large">CNY:￥${room.price}.00</span>
-                    <c:if test="${menu == 1}">
-                        <a href="#">
-                            <button type="button" class="layui-btn layui-btn-lg layui-btn-danger" id="toPayRoom1">立即预订</button>
-                        </a>
-                    </c:if>
-                    <c:if test="${menu == 2}">
-                        <a href="#">
-                            <button type="button" class="layui-btn layui-btn-danger" id="preOrder1">立即预约</button>
-                        </a>
-                    </c:if>
+                    <a href="#">
+                        <button type="button" class="layui-btn layui-btn-lg layui-btn-danger" id="toPayRoom1">立即预订</button>
+                    </a>
                 </td>
             </c:forEach>
             <c:forEach items="${roomList}" var="room" begin="${3*i+1}" step="1" end="${3*i+1}">
@@ -109,16 +102,9 @@
                     <c:if test="${room.rfloor == 2}">二层</c:if>
                     <c:if test="${room.rfloor == 3}">三层</c:if><br/>
                     <span style="font-size: large">CNY:￥${room.price}.00</span>
-                    <c:if test="${menu == 1}">
-                        <a href="#">
-                            <button type="button" class="layui-btn layui-btn-lg layui-btn-danger" id="toPayRoom2">立即预订</button>
-                        </a>
-                    </c:if>
-                    <c:if test="${menu == 2}">
-                        <a href="#">
-                            <button type="button" class="layui-btn layui-btn-danger" id="preOrder2">立即预约</button>
-                        </a>
-                    </c:if>
+                    <a href="#">
+                        <button type="button" class="layui-btn layui-btn-lg layui-btn-danger" id="toPayRoom2">立即预订</button>
+                    </a>
                 </td>
             </c:forEach>
             <c:forEach items="${roomList}" var="room" begin="${3*i+2}" step="1" end="${3*i+2}">
@@ -139,21 +125,13 @@
                     <c:if test="${room.rfloor == 2}">二层</c:if>
                     <c:if test="${room.rfloor == 3}">三层</c:if><br/>
                     <span style="font-size: large">CNY:￥${room.price}.00</span>
-                    <c:if test="${menu == 1}">
-                        <a href="#">
-                            <button type="button" class="layui-btn layui-btn-lg layui-btn-danger" id="toPayRoom3">立即预订</button>
-                        </a>
-                    </c:if>
-                    <c:if test="${menu == 2}">
-                        <a href="#">
-                            <button type="button" class="layui-btn layui-btn-danger" id="preOrder3">立即预约</button>
-                        </a>
-                    </c:if>
+                    <a href="#">
+                        <button type="button" class="layui-btn layui-btn-lg layui-btn-danger" id="toPayRoom3">立即预订</button>
+                    </a>
                 </td>
             </c:forEach>
         </tr>
     </c:forEach>
-
 </table>
 </body>
 <script>

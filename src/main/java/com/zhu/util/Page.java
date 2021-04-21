@@ -21,7 +21,7 @@ public class Page {
     private List<Food> foodList;
     private List<Order> orderList;
     private List<Notice> noticeList;
-
+    private List<Role> roleList;
 
     public void setTotalCount(int totalCount) {
         if(totalCount > 0){

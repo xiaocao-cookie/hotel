@@ -26,4 +26,8 @@ public interface FoodMapper {
     public List<Food> verifyFoodName(String name);
     //添加菜品
     public Integer addFood(Food food);
+    //根据id查询菜品信息
+    public Food queryFoodById(Integer id);
+    //修改菜品信息
+    public Integer updateFood(Food food);
 }

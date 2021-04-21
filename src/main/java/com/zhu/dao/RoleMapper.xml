@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+    namespace: 对应dao的全限定名(包名+接口名),也就是../*Mapper
+-->
+<mapper namespace="com.zhu.dao.RoleMapper">
+    <insert id="addRole">
+        INSERT INTO `hotel_role`(`id`, `roleName`, `roleAuth`, `desc`, `status`)
+        VALUES (4, #{roleName}, #{roleAuth}, #{desc}, #{status});
+    </insert>
+    <update id="startOrStopRoleById">
+        UPDATE `hotel_role` SET `status` = #{status} WHERE `id` = #{id}
+    </update>
+    <update id="updateRole">
+        UPDATE `hotel_role`
+        SET `roleName` = #{roleName}, `roleAuth` = #{roleAuth}, `desc` = #{desc}, `status` = #{status}
+        WHERE `id` = #{id};
+    </update>
+    <delete id="deleteRoleById">
+        delete from hotel_role where id = #{id}
+    </delete>
+    <select id="queryTotalCount" resultType="java.lang.Integer">
+        SELECT COUNT(1) FROM `hotel_role`
+    </select>
+    <select id="queryPageRoles" resultType="com.zhu.entity.Role">
+        SELECT * FROM `hotel_role` LIMIT #{from},#{pageSize}
+    </select>
+    <select id="queryUsersByRoleId" resultType="java.lang.Integer">
+        SELECT count(1) FROM `hotel_user` u,`hotel_role` r
+        WHERE u.type = r.id AND u.type = #{id}
+    </select>
+    <select id="verifyRoleName" resultType="com.zhu.entity.Role">
+        SELECT * FROM `hotel_role` WHERE roleName = #{roleName}
+    </select>
+    <select id="queryRoleById" resultType="com.zhu.entity.Role">
+        SELECT * FROM `hotel_role` WHERE id = #{id}
+    </select>
+</mapper>

@@ -24,4 +24,12 @@ public interface UserService {
     public Integer deleteUserById(Integer id);
     //查询所有用户(除登录的用户id外，用于发布通知)
     public List<User> queryAllUsersEscapeId(Integer id);
+    //查询管理员列表
+    public List<User> queryAdminList();
+    //通过id查询用户
+    public User queryUserById(Integer id);
+    //修改用户
+    public Integer updateUser(User user);
+    //用户修改个人信息
+    public Integer modifyInfo(User user);
 }

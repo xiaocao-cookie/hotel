@@ -78,7 +78,7 @@ public class UserController {
         List<User> userList = pager.getUserList();
         model.addAttribute("userList",userList);
         model.addAttribute("pager",pager);
-        return "backend/member-list";
+        return "backend/member/member-list";
     }
 
     //根据用户id删除用户
@@ -114,6 +114,70 @@ public class UserController {
     //添加用户与注册用户逻辑相同（RegisterController）
     @RequestMapping("/toAddUser")
     public String toAddUser(){
-        return "backend/member-add";
+        return "backend/member/member-add";
+    }
+
+    //用户信息=去修改
+    @RequestMapping("/toUpdateUser")
+    public String toUpdateUser(@RequestParam("id") Integer id,
+                               @RequestParam("info") Integer info,
+                               Model model){
+        User user = userService.queryUserById(id);
+        model.addAttribute("id",id);
+        model.addAttribute("loginName",user.getLoginName());
+        model.addAttribute("password",user.getPassword());
+        model.addAttribute("sex",user.getSex());
+        model.addAttribute("idCard",user.getIdCard());
+        model.addAttribute("userType",user.getType());
+        //info == 1为用户修改个人信息，info==2为管理员在后台编辑用户信息
+        model.addAttribute("info",info);
+        return "backend/member/member-edit";
+    }
+
+    //用户信息-修改
+    @RequestMapping("/updateUser")
+    public void updateUserById(@RequestParam("id") Integer id,
+                               @RequestParam("loginName") String loginName,
+                               @RequestParam("password") String password,
+                               @RequestParam("sex") Integer sex,
+                               @RequestParam("idCard") String idCard,
+                               @RequestParam("userType") Integer userType,
+                               HttpServletResponse response) throws Exception{
+        PrintWriter out = response.getWriter();
+        User user = new User();
+        user.setId(id);
+        user.setLoginName(loginName);
+        user.setPassword(password);
+        user.setSex(sex);
+        user.setIdCard(idCard);
+        user.setType(userType);
+        Integer i = userService.updateUser(user);
+        if (i > 0){
+            out.println("{'status':'1'}");
+        }else{
+            out.println("{'status':'2'}");
+        }
+
+    }
+
+    //用户修改个人信息
+    @RequestMapping("/modifyInfo")
+    public void modifyInfo(@RequestParam("id") Integer id,
+                           @RequestParam("loginName") String loginName,
+                           @RequestParam("sex") Integer sex,
+                           @RequestParam("idCard") String idCard,
+                           HttpServletResponse response) throws Exception{
+        PrintWriter out = response.getWriter();
+        User user = new User();
+        user.setId(id);
+        user.setLoginName(loginName);
+        user.setSex(sex);
+        user.setIdCard(idCard);
+        Integer i = userService.modifyInfo(user);
+        if (i > 0){
+            out.println("{'status':'1'}");
+        }else{
+            out.println("{'status':'2'}");
+        }
     }
 }

@@ -30,4 +30,8 @@ public interface RoomMapper {
     public List<Room> verifyRoomName(String rname);
     //添加房间
     public Integer addRoom(Room room);
+    //通过房间号查询房间信息
+    public Room queryRoomByRno(Integer rno);
+    //修改房间信息
+    public Integer updateRoom(Room room);
 }

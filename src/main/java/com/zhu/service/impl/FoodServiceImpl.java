@@ -28,9 +28,8 @@ public class FoodServiceImpl implements FoodService {
 
         if (currentPage <= 1){
             currentPage = 1;
-        }
-        if (currentPage >= page.getTotalCount()){
-            currentPage = page.getTotalCount();
+        } else if (currentPage > page.getPageCount()){
+            currentPage = page.getPageCount();
         }
         page.setCurrentPage(currentPage);
 
@@ -58,6 +57,18 @@ public class FoodServiceImpl implements FoodService {
     @Override
     public Integer addFood(Food food) {
         Integer i = foodMapper.addFood(food);
+        return i;
+    }
+
+    @Override
+    public Food queryFoodById(Integer id) {
+        Food food = foodMapper.queryFoodById(id);
+        return food;
+    }
+
+    @Override
+    public Integer updateFood(Food food) {
+        Integer i = foodMapper.updateFood(food);
         return i;
     }
 }

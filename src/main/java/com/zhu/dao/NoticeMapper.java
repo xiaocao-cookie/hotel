@@ -19,4 +19,7 @@ public interface NoticeMapper {
     public Integer addNotice(@Param("sendUid") Integer sendUid,
                              @Param("content") String content,
                              @Param("receiveUid") Integer receiveUid);
+    public Notice queryNoticeById(Integer id);
+    //更新通知
+    public Integer updateNoticeById(Notice notice);
 }

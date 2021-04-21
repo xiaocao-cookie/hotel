@@ -12,4 +12,8 @@ public interface NoticeService {
     public Integer deleteNoticeById(Integer id);
     //发布通知
     public Integer addNotice(Integer sendUid,Integer receiveUid,String content);
+    //根据id查询通知
+    public Notice queryNoticeById(Integer id);
+    //更改通知
+    public Integer updateNoticeById(Notice notice);
 }

@@ -30,7 +30,7 @@
                     <dl class="layui-nav-child">
                         <!-- 二级菜单 -->
                         <dd>
-                            <a onclick="xadmin.open('个人信息','http://www.baidu.com')">个人信息</a></dd>
+                            <a onclick="xadmin.open('个人信息','../user/toPersonalInfo')">个人信息</a></dd>
                         <dd>
                             <a onclick="xadmin.open('修改密码','/hotel-management-system/user/toChangePassword')">修改密码</a></dd>
                         <dd>

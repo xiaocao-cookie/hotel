@@ -14,6 +14,16 @@
         SET `password` = #{newPassword}
         WHERE `id` = #{id};
     </update>
+    <update id="updateUser">
+        UPDATE `hotel_user`
+        SET `loginName` = #{loginName}, `password` = #{password}, `sex` = #{sex}, `idCard` = #{idCard}, `type` = #{type}
+        WHERE `id` = #{id};
+    </update>
+    <update id="modifyInfo">
+        UPDATE `hotel_user`
+        SET `loginName` = #{loginName}, `sex` = #{sex}, `idCard` = #{idCard}
+        WHERE `id` = #{id};
+    </update>
     <delete id="deleteUserById">
         DELETE FROM `hotel_user` WHERE id = #{id}
     </delete>
@@ -50,5 +60,11 @@
     </select>
     <select id="queryAllUsersEscapeId" resultType="com.zhu.entity.User">
         SELECT * FROM `hotel_user` WHERE id != #{id}
+    </select>
+    <select id="queryAdminList" resultType="com.zhu.entity.User">
+        SELECT * FROM `hotel_user` WHERE type = 0
+    </select>
+    <select id="queryUserById" resultType="com.zhu.entity.User">
+        SELECT * FROM `hotel_user` WHERE id = #{id}
     </select>
 </mapper>

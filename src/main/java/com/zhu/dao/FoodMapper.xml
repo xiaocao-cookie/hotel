@@ -9,6 +9,11 @@
         INSERT INTO `hotel_food`(`name`, `price`, `picPath`, `stars`)
         VALUES (#{name}, #{price}, '30.jpg', #{stars});
     </insert>
+    <update id="updateFood">
+        UPDATE `hotel_food`
+        SET `name` = #{name}, `price` = #{price}, `picPath` = '43.jpg', `stars` = #{stars}
+        WHERE `id` = #{id};
+    </update>
     <delete id="deleteFoodById">
         DELETE FROM hotel_food WHERE id = #{id}
     </delete>
@@ -43,5 +48,8 @@
     </select>
     <select id="verifyFoodName" resultType="com.zhu.entity.Food">
         SELECT * FROM hotel_food WHERE `name` = #{name}
+    </select>
+    <select id="queryFoodById" resultType="com.zhu.entity.Food">
+        SELECT * FROM `hotel_food` WHERE id = #{id}
     </select>
 </mapper>

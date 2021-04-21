@@ -17,6 +17,11 @@
         INSERT INTO `hotel_notice`(`nSendUid`, `content`, `nReceiveUid`, `time`)
         VALUES (#{sendUid}, #{content}, #{receiveUid}, SYSDATE());
     </insert>
+    <update id="updateNoticeById">
+        UPDATE `hotel_notice`
+        SET `nSendUid` = #{nSendUid}, `content` = #{content}, `nReceiveUid` = #{nReceiveUid}, `time` = SYSDATE()
+        WHERE `id` = #{id};
+    </update>
     <delete id="deleteNoticeById">
         DELETE FROM hotel_notice WHERE id = #{id}
     </delete>
@@ -42,6 +47,9 @@
         <if test="content != null and content != '' ">
             AND n.content LIKE CONCAT('%',#{content},'%')
         </if>
+    </select>
+    <select id="queryNoticeById" resultType="com.zhu.entity.Notice">
+        SELECT * FROM `hotel_notice` WHERE id = #{id}
     </select>
 
 </mapper>

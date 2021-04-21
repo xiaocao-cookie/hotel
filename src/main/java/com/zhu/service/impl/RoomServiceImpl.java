@@ -13,6 +13,7 @@ import java.util.List;
 
 @Service
 public class RoomServiceImpl implements RoomService {
+
     @Autowired
     public RoomMapper roomMapper;
     @Autowired
@@ -47,9 +48,8 @@ public class RoomServiceImpl implements RoomService {
         //页面合理范围
         if (currPageNo <= 1){
             currPageNo = 1;
-        }
-        if (currPageNo >= page.getTotalCount()){
-            currPageNo = page.getTotalCount();
+        }else if (currPageNo > page.getPageCount()){
+            currPageNo = page.getPageCount();
         }
 
         page.setCurrentPage(currPageNo);
@@ -77,6 +77,18 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public Integer addRoom(Room room) {
         Integer i = roomMapper.addRoom(room);
+        return i;
+    }
+
+    @Override
+    public Room queryRoomByRno(Integer rno) {
+        Room room = roomMapper.queryRoomByRno(rno);
+        return room;
+    }
+
+    @Override
+    public Integer updateRoom(Room room) {
+        Integer i = roomMapper.updateRoom(room);
         return i;
     }
 }

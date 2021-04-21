@@ -54,9 +54,8 @@ public class UserServiceImpl implements UserService {
         //判断页面合理范围
         if(currentPageNo <= 1){
             currentPageNo = 1;
-        }
-        if (currentPageNo >= page.getTotalCount()){
-            currentPageNo = page.getTotalCount();
+        }else if (currentPageNo > page.getPageCount()){
+            currentPageNo = page.getPageCount();
         }
 
         page.setCurrentPage(currentPageNo);
@@ -79,5 +78,29 @@ public class UserServiceImpl implements UserService {
     public List<User> queryAllUsersEscapeId(Integer id) {
         List<User> userList = userMapper.queryAllUsersEscapeId(id);
         return userList;
+    }
+
+    @Override
+    public List<User> queryAdminList() {
+        List<User> userList = userMapper.queryAdminList();
+        return userList;
+    }
+
+    @Override
+    public User queryUserById(Integer id) {
+        User user = userMapper.queryUserById(id);
+        return user;
+    }
+
+    @Override
+    public Integer updateUser(User user) {
+        Integer i = userMapper.updateUser(user);
+        return i;
+    }
+
+    @Override
+    public Integer modifyInfo(User user) {
+        Integer i = userMapper.modifyInfo(user);
+        return i;
     }
 }

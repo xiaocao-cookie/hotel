@@ -43,16 +43,9 @@ public class HomeController {
 
     //点击“我要入住”和“预约入住”跳转房间列表界面
     @RequestMapping("/goRoomList")
-    public String goRoomList(@RequestParam("id") Integer id,
-                             Model model){
+    public String goRoomList(Model model){
         List<Room> roomList = roomService.queryRoomList();
         model.addAttribute("roomList",roomList);
-        if (id == 1){
-            model.addAttribute("menu",1);
-        }
-        if (id == 2){
-            model.addAttribute("menu",2);
-        }
         return "pre/roomList";
     }
 

@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
-import javax.management.modelmbean.ModelMBeanOperationInfo;
 import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 import java.util.List;
@@ -23,10 +22,10 @@ public class RoomController {
     //去添加
     @RequestMapping("/toAddRoom")
     public String toAddRoom(){
-        return "backend/room-add";
+        return "backend/room/room-add";
     }
 
-    //添加房屋
+    //添加房间
     @RequestMapping("/addRoom")
     public void addRoom(@RequestParam("roomName") String roomName,
                         @RequestParam("roomType") Integer roomType,
@@ -46,6 +45,31 @@ public class RoomController {
             out.println("{'status':'1','message':'添加成功'}");
         }else {
             out.println("{'status':'2','message':'添加失败'}");
+        }
+    }
+
+    //修改房间
+    @RequestMapping("/updateRoom")
+    public void updateRoom(@RequestParam("rno") Integer rno,
+                           @RequestParam("roomName") String roomName,
+                           @RequestParam("roomType") Integer roomType,
+                           @RequestParam("status") String status,
+                           @RequestParam("roomStyle") String roomStyle,
+                           @RequestParam("roomFloor") Integer roomFloor,
+                           HttpServletResponse response)throws Exception{
+        PrintWriter out = response.getWriter();
+        Room room = new Room();
+        room.setRname(roomName);
+        room.setRtype(roomType);
+        room.setStatus(status);
+        room.setRstyle(roomStyle);
+        room.setRfloor(roomFloor);
+        room.setRno(rno);
+        Integer j = roomService.updateRoom(room);
+        if (j > 0){
+            out.println("{'status':'1','message':'修改成功'}");
+        }else {
+            out.println("{'status':'2','message':'修改失败'}");
         }
     }
 
@@ -77,7 +101,7 @@ public class RoomController {
         List<Room> roomList = pager.getRoomList();
         model.addAttribute("roomList",roomList);
         model.addAttribute("pager",pager);
-        return "backend/room-list";
+        return "backend/room/room-list";
     }
 
     //删除某个房间
@@ -91,5 +115,20 @@ public class RoomController {
         }else {
             out.println("{'status':'2','message':'删除失败'}");
         }
+    }
+
+    //房屋修改--去修改
+    @RequestMapping("/toUpdateRoom")
+    public String toUpdateRoom(@RequestParam("rno") Integer rno,
+                               Model model){
+        Room room = roomService.queryRoomByRno(rno);
+        model.addAttribute("rno",rno);
+        model.addAttribute("roomName",room.getRname());
+        model.addAttribute("roomType",room.getRtype());
+        model.addAttribute("status",room.getStatus());
+        model.addAttribute("roomStyle",room.getRstyle());
+        model.addAttribute("images",room.getPicPath());
+        model.addAttribute("roomFloor",room.getRfloor());
+        return "backend/room/room-edit";
     }
 }

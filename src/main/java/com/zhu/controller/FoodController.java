@@ -47,12 +47,12 @@ public class FoodController {
         List<Food> foodList = pager.getFoodList();
         model.addAttribute("foodList",foodList);
         model.addAttribute("pager",pager);
-        return "backend/food-list";
+        return "backend/food/food-list";
     }
     //去添加
     @RequestMapping("/toAddFood")
     public String toAddFood(){
-        return "backend/food-add";
+        return "backend/food/food-add";
     }
 
     //添加菜品
@@ -71,6 +71,27 @@ public class FoodController {
             out.println("{'status':'1','message':'添加成功'}");
         }else {
             out.println("{'status':'2','message':'添加失败'}");
+        }
+    }
+
+    //修改菜品信息
+    @RequestMapping("/updateFood")
+    public void updateFood(@RequestParam("id") Integer id,
+                           @RequestParam("foodName") String foodName,
+                           @RequestParam("price") Integer price,
+                           @RequestParam("stars") Integer stars,
+                           HttpServletResponse response)throws Exception{
+        PrintWriter out = response.getWriter();
+        Food food = new Food();
+        food.setName(foodName);
+        food.setPrice(price);
+        food.setStars(stars);
+        food.setId(id);
+        Integer j = foodService.updateFood(food);
+        if (j > 0){
+            out.println("{'status':'1','message':'修改成功'}");
+        }else {
+            out.println("{'status':'2','message':'修改失败'}");
         }
     }
 
@@ -100,4 +121,16 @@ public class FoodController {
         }
     }
 
+    //修改菜品--去修改
+    @RequestMapping("/toUpdateFood")
+    public String toUpdateFood(@RequestParam("id") Integer id,
+                               Model model){
+        Food food = foodService.queryFoodById(id);
+        model.addAttribute("id",id);
+        model.addAttribute("name",food.getName());
+        model.addAttribute("price",food.getPrice());
+        model.addAttribute("image",food.getPicPath());
+        model.addAttribute("stars",food.getStars());
+        return "backend/food/food-edit";
+    }
 }

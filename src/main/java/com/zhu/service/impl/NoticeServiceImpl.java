@@ -28,9 +28,8 @@ public class NoticeServiceImpl implements NoticeService {
         //页面合理范围
         if (currentPage <= 1){
             currentPage = 1;
-        }
-        if (currentPage >= totalCount){
-            currentPage = totalCount;
+        }else if (currentPage > page.getPageCount()){
+            currentPage = page.getPageCount();
         }
         page.setCurrentPage(currentPage);
 
@@ -54,6 +53,18 @@ public class NoticeServiceImpl implements NoticeService {
     @Override
     public Integer addNotice(Integer sendUid, Integer receiveUid, String content) {
         Integer i = noticeMapper.addNotice(sendUid, content, receiveUid);
+        return i;
+    }
+
+    @Override
+    public Notice queryNoticeById(Integer id) {
+        Notice notice = noticeMapper.queryNoticeById(id);
+        return notice;
+    }
+
+    @Override
+    public Integer updateNoticeById(Notice notice) {
+        Integer i = noticeMapper.updateNoticeById(notice);
         return i;
     }
 

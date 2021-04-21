@@ -43,8 +43,10 @@
         </tbody>
     </table>
     <br/><br/><br>
-    <button type="button" class="layui-btn layui-btn-lg layui-btn-danger" style="margin-left: 270px" id="hideInfo">隐藏详细信息</button>
+    <button type="button" class="layui-btn layui-btn-lg layui-btn-danger" style="margin-left: 200px" id="hideInfo">隐藏详细信息</button>
     <button type="button" class="layui-btn layui-btn-lg layui-btn-normal" style="margin-left: 30px" id="viewInfo">查看详细信息</button>
+    <button type="button" class="layui-btn layui-btn-lg layui-btn-warm" style="margin-left: 30px" id="modifyInfo"
+            onclick="xadmin.open('编辑','../user/toUpdateUser?info=1&id='+${sessionScope.loginUser.id},600,520);">修改个人信息</button>
 </div>
 </body>
 <script>

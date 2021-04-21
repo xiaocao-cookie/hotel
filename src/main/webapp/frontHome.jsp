@@ -46,13 +46,13 @@
                 </div>
             </div>
             <br><br>
-            <a href="${ctx}/Home/goRoomList?id=1"><button type="button" class="layui-btn layui-btn-radius" style="width: 136px;height: 50px;font-size: medium">我要入住</button></a>
-            <a href="${ctx}/Home/goRoomList?id=2"><button type="button" class="layui-btn layui-btn-radius" style="width: 136px;height: 50px;font-size: medium">预约入住</button></a>
+            <a href="#"><button type="button" class="layui-btn layui-btn-radius" onclick="verifyUser('${sessionScope.loginUser.id}',1)" style="width: 136px;height: 50px;font-size: medium">我要入住</button></a>
+            <a href="#"><button type="button" class="layui-btn layui-btn-radius" onclick="verifyUser('${sessionScope.loginUser.id}',2)" style="width: 136px;height: 50px;font-size: medium">我的订单</button></a>
             <br><br><br>
-            <a href="#"><button type="button" class="layui-btn layui-btn-radius" style="width: 136px;height: 50px;font-size: medium">退租</button></a>
-            <a href="#"><button type="button" class="layui-btn layui-btn-radius" style="width: 136px;height: 50px;font-size: medium">续租</button></a>
+            <a href="#"><button type="button" class="layui-btn layui-btn-radius" onclick="verifyUser('${sessionScope.loginUser.id}',3)" style="width: 136px;height: 50px;font-size: medium">退租</button></a>
+            <a href="#"><button type="button" class="layui-btn layui-btn-radius" onclick="verifyUser('${sessionScope.loginUser.id}',4)" style="width: 136px;height: 50px;font-size: medium">续租</button></a>
             <br><br><br>
-            <a href="${ctx}/food/getFoodList"><button type="button" class="layui-btn layui-btn-radius" style="width: 136px;height: 50px;font-size: medium">点餐</button></a>
+            <a href="#"><button type="button" class="layui-btn layui-btn-radius" onclick="verifyUser('${sessionScope.loginUser.id}',5)" style="width: 136px;height: 50px;font-size: medium">点餐</button></a>
             <a href="${ctx}/Home/toGetHotelInfo"><button type="button" class="layui-btn layui-btn-radius" style="width: 136px;height: 50px;font-size: medium">酒店信息</button></a>
         </div>
     </div>
@@ -67,6 +67,43 @@
             ,position: 'static'
         });
     });
+
+    var layer = layui.layer;
+    function verifyUser(id,menu){
+        if (id == null || id == ""){
+            layer.confirm('需要先登录哦',{
+                btn: ['去登录'] //可以无限个按钮
+            },function(){
+                window.location.href = contextPath + "/Login/toLogin";
+            });
+            return;
+        }
+        //点击我要入住
+        if (menu == 1){
+            window.location.href = contextPath + "/Home/goRoomList";
+            return;
+        }
+        //点击我的订单
+        if (menu == 2){
+            window.location.href = contextPath + "/Home/goRoomList";
+            return;
+        }
+        //点击退租
+        if (menu == 3){
+            window.location.href = contextPath + "/Home/goRoomList";
+            return;
+        }
+        //点击续租
+        if (menu == 4){
+            window.location.href = contextPath + "/Home/goRoomList";
+            return;
+        }
+        //点击点餐
+        if (menu == 5){
+            window.location.href = contextPath + "/food/getFoodList";
+            return;
+        }
+    }
 
     //轮播图实现
     layui.use('carousel', function(){

@@ -11,10 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
-import javax.jws.WebParam;
 import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -38,7 +36,7 @@ public class NoticeController {
         model.addAttribute("pager",pager);
         model.addAttribute("noticeList",noticeList);
         model.addAttribute("userList",userList);
-        return "backend/notice-list";
+        return "backend/notice/notice-list";
     }
     //删除通知
     @RequestMapping("/deleteNoticeById")
@@ -58,16 +56,21 @@ public class NoticeController {
     public String toAddNotice(@RequestParam("id") Integer id, Model model){
         List<User> userList = userService.queryAllUsersEscapeId(id);
         model.addAttribute("userList",userList);
-        return "backend/notice-add";
+        return "backend/notice/notice-add";
     }
 
     //发布通知
     @RequestMapping("/addNotice")
-    public void addNotice(@RequestParam("sendUid") Integer sendUid,
+    public void addNotice(@RequestParam(value = "id",required = false) Integer id,
+                          @RequestParam("sendUid") Integer sendUid,
                           @RequestParam("receiveUids[]") Integer[] receiveUids,
                           @RequestParam("content") String content,
                           HttpServletResponse response)throws Exception{
         PrintWriter out = response.getWriter();
+        Notice notice = new Notice();
+        notice.setId(id);
+        notice.setNSendUid(sendUid);
+        notice.setContent(content);
         for (Integer receiveUid : receiveUids) {
             Integer i = noticeService.addNotice(sendUid,receiveUid,content);
             if (i <= 0){
@@ -75,7 +78,60 @@ public class NoticeController {
             }
         }
         out.println("{'status':'1','message':'发布成功'}");
+
     }
 
+    //修改通知--修改
+    @RequestMapping("/updateNotice")
+    public void updateNotice(@RequestParam(value = "id",required = false) Integer id,
+                             @RequestParam("sendUid") Integer sendUid,
+                             @RequestParam("nReceiveUid") Integer nReceiveUid,
+                             @RequestParam("receiveUids[]") Integer[] receiveUids,
+                             @RequestParam("content") String content,
+                             HttpServletResponse response)throws Exception{
+        PrintWriter out = response.getWriter();
+        Notice notice = new Notice();
+        notice.setId(id);
+        notice.setNSendUid(sendUid);
+        notice.setContent(content);
+        if (receiveUids.length == 1){
+            notice.setNReceiveUid(receiveUids[0]);
+            Integer j = noticeService.updateNoticeById(notice);
+            if (j > 0){
+                out.println("{'status':'1','message':'修改成功'}");
+            }else {
+                out.println("{'status':'2','message':'修改失败'}");
+            }
+        }else{
+            for (Integer receiveUid : receiveUids) {
+                if (receiveUid == nReceiveUid){
+                    Integer j = noticeService.deleteNoticeById(id);
+                }
+                Integer i = noticeService.addNotice(sendUid,receiveUid,content);
+                if (i <= 0){
+                    out.println("{'status':'2','message':'修改失败'}");
+                }
+            }
+            out.println("{'status':'1','message':'修改成功'}");
+        }
+    }
+
+    //修改通知--去修改
+    @RequestMapping("/toUpdateNotice")
+    public String toUpdateNotice(@RequestParam("id") Integer id,
+                                 Model model){
+        Notice notice = noticeService.queryNoticeById(id);
+        model.addAttribute("id",id);
+        model.addAttribute("nSendUid",notice.getNSendUid());
+        model.addAttribute("nReceiveUid",notice.getNReceiveUid());
+        User sendUser = userService.queryUserById(notice.getNSendUid());
+        model.addAttribute("nSendName",sendUser.getLoginName());
+        List<User> userList = userService.queryAllUsersEscapeId(id);
+        model.addAttribute("userList",userList);
+        User receiveUser = userService.queryUserById(notice.getNReceiveUid());
+        model.addAttribute("nReceiveName",receiveUser.getLoginName());
+        model.addAttribute("content",notice.getContent());
+        return "backend/notice/notice-edit";
+    }
 
 }

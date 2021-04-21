@@ -19,4 +19,8 @@ public interface RoomService {
     public List<Room> verifyRoomName(String rname);
     //添加房间
     public Integer addRoom(Room room);
+    //根据房间号查询房间内
+    public Room queryRoomByRno(Integer rno);
+    //修改房屋信息
+    public Integer updateRoom(Room room);
 }

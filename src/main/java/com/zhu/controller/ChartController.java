@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ChartController {
     @RequestMapping("/member")
     public String chart1(){
-        return "backend/member-chart";
+        return "backend/member/member-chart";
     }
 }
