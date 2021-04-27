@@ -6,8 +6,50 @@
 -->
 <mapper namespace="com.zhu.dao.OrderMapper">
 
-    <insert id="orderFoods">
-        INSERT INTO `hotel_order`(`uid`, `status`, `price`, `startTime`)
-        VALUES (#{uid}, '已预订', #{price}, SYSDATE())
+    <insert id="orderRoom">
+        INSERT INTO `hotel_room_order`(`userId`, `rno`, `startTime`, `endTime`, `cost`)
+        VALUES (#{userId}, #{rno}, #{startTime}, #{endTime}, #{cost});
     </insert>
+    <insert id="orderFood">
+        INSERT INTO `hotel_food_order`(`userId`, `fid`, `quantity`, `cost`)
+        VALUES (#{userId}, #{fid}, #{quantity}, #{cost});
+    </insert>
+    <update id="modifyDate">
+        UPDATE `hotel_room_order`
+        SET `startTime` = #{startTime}, `endTime` = #{endTime}, cost= #{cost}
+        WHERE `id` = #{id}
+    </update>
+    <delete id="deleteRoomOrderByRno">
+        DELETE FROM `hotel_room_order` WHERE rno = #{rno}
+    </delete>
+    <delete id="deleteRoomOrderById">
+        DELETE FROM `hotel_room_order` WHERE id = #{id}
+    </delete>
+    <delete id="deleteFoodOrderById">
+        DELETE FROM `hotel_food_order` WHERE id = #{id}
+    </delete>
+    <select id="queryRoomsByUserId" resultType="com.zhu.entity.RoomOrder">
+        SELECT * FROM `hotel_room_order` WHERE userId = #{userId}
+    </select>
+    <select id="queryRoomOrderById" resultType="com.zhu.entity.RoomOrder">
+        SELECT * FROM `hotel_room_order` WHERE id = #{id}
+    </select>
+    <select id="queryRoomOrderByUserId" resultType="com.zhu.entity.RoomOrder">
+        SELECT * FROM `hotel_room_order` WHERE userId = #{userId}
+    </select>
+    <select id="queryFoodOrderByUserId" resultType="com.zhu.entity.FoodOrder">
+        SELECT * FROM `hotel_food_order` WHERE userId = #{userId}
+    </select>
+    <select id="queryRoomTotalCounts" resultType="java.lang.Integer">
+        SELECT count(1) FROM `hotel_room_order`
+    </select>
+    <select id="queryPageRoomOrders" resultType="com.zhu.entity.RoomOrder">
+        SELECT * FROM `hotel_room_order` LIMIT #{from} , #{pageSize}
+    </select>
+    <select id="queryFoodTotalCounts" resultType="java.lang.Integer">
+        SELECT count(1) FROM `hotel_food_order`
+    </select>
+    <select id="queryPageFoodOrders" resultType="com.zhu.entity.FoodOrder">
+        SELECT * FROM `hotel_food_order` WHERE 1 = 1 LIMIT #{from},#{pageSize}
+    </select>
 </mapper>

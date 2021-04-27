@@ -11,4 +11,9 @@ public class PriceServiceImpl implements PriceService {
     @Autowired
     public PriceMapper priceMapper;
 
+    @Override
+    public Integer queryPriceByType(Integer ptid) {
+        Integer price = priceMapper.queryPriceByType(ptid);
+        return price;
+    }
 }

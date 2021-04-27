@@ -80,7 +80,12 @@
                         <c:if test="${room.rfloor == 3}">三层</c:if><br/>
                     <span style="font-size: large">CNY:￥${room.price}.00</span>
                     <a href="#">
-                        <button type="button" class="layui-btn layui-btn-lg layui-btn-danger" id="toPayRoom1">立即预订</button>
+                        <c:if test="${room.status == '未预订'}">
+                            <button type="button" class="layui-btn layui-btn-lg layui-btn-danger" id="toPayRoom1" onclick="xadmin.open('订单信息','../order/toOrderRoom?rno='+${room.rno})">立即预订</button>
+                        </c:if>
+                        <c:if test="${room.status != '未预订'}">
+                            <button disabled="disabled" type="button" class="layui-btn layui-btn-lg layui-btn-primary" id="toPayRoom1">${room.status}</button>
+                        </c:if>
                     </a>
                 </td>
             </c:forEach>
@@ -103,7 +108,12 @@
                     <c:if test="${room.rfloor == 3}">三层</c:if><br/>
                     <span style="font-size: large">CNY:￥${room.price}.00</span>
                     <a href="#">
-                        <button type="button" class="layui-btn layui-btn-lg layui-btn-danger" id="toPayRoom2">立即预订</button>
+                        <c:if test="${room.status == '未预订'}">
+                            <button type="button" class="layui-btn layui-btn-lg layui-btn-danger" id="toPayRoom2" onclick="xadmin.open('订单信息','../order/toOrderRoom?rno='+${room.rno})">立即预订</button>
+                        </c:if>
+                        <c:if test="${room.status != '未预订'}">
+                            <button disabled="disabled" type="button" class="layui-btn layui-btn-lg layui-btn-primary" id="toPayRoom2">${room.status}</button>
+                        </c:if>
                     </a>
                 </td>
             </c:forEach>
@@ -126,7 +136,12 @@
                     <c:if test="${room.rfloor == 3}">三层</c:if><br/>
                     <span style="font-size: large">CNY:￥${room.price}.00</span>
                     <a href="#">
-                        <button type="button" class="layui-btn layui-btn-lg layui-btn-danger" id="toPayRoom3">立即预订</button>
+                        <c:if test="${room.status == '未预订'}">
+                            <button type="button" class="layui-btn layui-btn-lg layui-btn-danger" id="toPayRoom3" onclick="xadmin.open('订单信息','../order/toOrderRoom?rno='+${room.rno})">立即预订</button>
+                        </c:if>
+                        <c:if test="${room.status != '未预订'}">
+                            <button disabled="disabled" type="button" class="layui-btn layui-btn-lg layui-btn-primary" id="toPayRoom3">${room.status}</button>
+                        </c:if>
                     </a>
                 </td>
             </c:forEach>

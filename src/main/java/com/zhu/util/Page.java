@@ -19,9 +19,10 @@ public class Page {
     private List<User> userList;
     private List<Room> roomList;
     private List<Food> foodList;
-    private List<Order> orderList;
     private List<Notice> noticeList;
     private List<Role> roleList;
+    private List<RoomOrder> roomOrderList;
+    private List<FoodOrder> foodOrderList;
 
     public void setTotalCount(int totalCount) {
         if(totalCount > 0){

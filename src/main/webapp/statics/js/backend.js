@@ -13,7 +13,12 @@ function delUser(obj,id){
                 if (result.status == 1){
                     //发异步删除数据
                     $(obj).parents("tr").remove();
-                    layer.msg(result.message,{icon:1,time:1000});
+                    layer.alert(result.message, {
+                        icon: 1
+                    }, function (index) {
+                        layer.close(index);
+                        window.location.reload();
+                    });
                 }else{
                     layer.msg(result.message,{icon:2,time:1000});
                 }
@@ -49,7 +54,12 @@ function delAll () {
                     }
                 }
                 $(".layui-form-checked").not('.header').parents('tr').remove();
-                layer.msg('删除成功',{icon:1,time:1000});
+                layer.alert('删除成功', {
+                    icon: 6
+                }, function (index) {
+                    layer.close(index);
+                    window.location.reload();
+                });
             }
         });
     });
@@ -522,7 +532,12 @@ function delRoom(obj,id) {
                 if (result.status == 1){
                     //发异步删除数据
                     $(obj).parents("tr").remove();
-                    layer.msg(result.message,{icon:1,time:1000});
+                    layer.alert(result.message, {
+                        icon: 6
+                    }, function (index) {
+                        layer.close(index);
+                        window.location.reload();
+                    });
                 }else{
                     layer.msg(result.message,{icon:2,time:1000});
                 }
@@ -546,7 +561,12 @@ function delFood(obj,id) {
                 if (result.status == 1){
                     //发异步删除数据
                     $(obj).parents("tr").remove();
-                    layer.msg(result.message,{icon:1,time:1000});
+                    layer.alert(result.message, {
+                        icon: 6
+                    }, function (index) {
+                        layer.close(index);
+                        window.location.reload();
+                    });
                 }else{
                     layer.msg(result.message,{icon:2,time:1000});
                 }
@@ -702,7 +722,12 @@ function delNotice(obj,id) {
                 if (result.status == 1){
                     //发异步删除数据
                     $(obj).parents("tr").remove();
-                    layer.msg(result.message,{icon:1,time:1000});
+                    layer.alert(result.message, {
+                        icon: 6
+                    }, function (index) {
+                        layer.close(index);
+                        window.location.reload();
+                    });
                 }else{
                     layer.msg(result.message,{icon:2,time:1000});
                 }
@@ -849,7 +874,12 @@ function delRole(obj,id) {
                 if (result.status == 1){
                     //发异步删除数据
                     $(obj).parents("tr").remove();
-                    layer.msg(result.message,{icon:1,time:2000});
+                    layer.alert(result.message, {
+                        icon: 6
+                    }, function (index) {
+                        layer.close(index);
+                        window.location.reload();
+                    });
                 }else{
                     layer.msg(result.message,{icon:2,time:2000});
                 }
@@ -1045,4 +1075,60 @@ function updateRole() {
             }
         }
     })
+}
+
+//订单管理 -- 删除房间订单
+function delRoomOrder(obj,id) {
+    layer.confirm('确认要删除吗？',function(index){
+        $.ajax({
+            url: contextPath + "/order/deleteRoomOrderById",
+            method: 'post',
+            data:{
+                id: id
+            },
+            success: function (jsonStr) {
+                var result = eval("("+jsonStr+")");
+                if (result.status == 1){
+                    //发异步删除数据
+                    $(obj).parents("tr").remove();
+                    layer.alert(result.message, {
+                        icon: 6
+                    }, function (index) {
+                        layer.close(index);
+                        window.location.reload();
+                    });
+                }else{
+                    layer.msg(result.message,{icon:2,time:2000});
+                }
+            }
+        });
+    });
+}
+
+//订单管理 -- 删除菜品订单
+function delFoodOrder(obj,id) {
+    layer.confirm('确认要删除吗？',function(index){
+        $.ajax({
+            url: contextPath + "/order/deleteFoodOrderById",
+            method: 'post',
+            data:{
+                id: id
+            },
+            success: function (jsonStr) {
+                var result = eval("("+jsonStr+")");
+                if (result.status == 1){
+                    //发异步删除数据
+                    $(obj).parents("tr").remove();
+                    layer.alert(result.message, {
+                        icon: 6
+                    }, function (index) {
+                        layer.close(index);
+                        window.location.reload();
+                    });
+                }else{
+                    layer.msg(result.message,{icon:2,time:2000});
+                }
+            }
+        });
+    });
 }

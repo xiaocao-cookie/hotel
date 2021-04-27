@@ -14,6 +14,12 @@
         SET `rname` = #{rname}, `rtype` = #{rtype}, `status` = #{status}, `rstyle` = #{rstyle}, `picPath` = #{picPath}, `rfloor` = #{rfloor}
         WHERE `rno` = #{rno};
     </update>
+    <update id="updateRstatusById">
+        UPDATE `hotel_room` SET `status` = '已预订' WHERE `rno` = #{rno};
+    </update>
+    <update id="modifyRstatusById">
+        UPDATE `hotel_room` SET `status` = '未预订' WHERE `rno` = #{rno};
+    </update>
     <delete id="deleteRoomById">
         DELETE FROM `hotel_room` WHERE rno = #{rno}
     </delete>

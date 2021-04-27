@@ -15,37 +15,6 @@
     left: 520px;
     top: 100px;
 }
-/*右上角购物车部分*/
-#stickyOrder{
-    position: sticky;
-    top: 0;
-    left: 1100px;
-    background-color: #eeeeee;
-    width: 300px;
-    z-index: 99;
-}
-#shoppingCart{
-    font-size: 40px;
-    color: #FF5722;
-    position: relative;
-    top: 2px;
-    left: 10px;
-    opacity: 100%;
-}
-#cartItem{
-    position: relative;
-    left: 10px;
-    font-size: 30px;
-    opacity: 100%;
-}
-#toPayButton{
-    color: white;
-    background-color: #FF5722;
-    font-size: 30px;
-    position: relative;
-    top: -5px;
-    left: 30px;
-}
 /*前台的我要入住和预约入住*/
 #roomTable{
     border-collapse:collapse;

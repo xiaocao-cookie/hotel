@@ -10,4 +10,15 @@ public class ChartController {
     public String chart1(){
         return "backend/member/member-chart";
     }
+
+    @RequestMapping("/weekChart")
+    public String weekChart(){
+        return "backend/order/week-echarts";
+    }
+
+    @RequestMapping("/monthChart")
+    public String monthChart(){
+        return "backend/order/month-echarts";
+    }
+
 }

@@ -34,4 +34,8 @@ public interface RoomMapper {
     public Room queryRoomByRno(Integer rno);
     //修改房间信息
     public Integer updateRoom(Room room);
+    //根据房间号修改房间信息
+    public Integer updateRstatusById(Integer rno);
+    //退租后把房间改成未预订
+    public Integer modifyRstatusById(Integer rno);
 }

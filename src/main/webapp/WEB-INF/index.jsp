@@ -73,9 +73,14 @@
                             <i class="iconfont nav_right">&#xe697;</i></a>
                         <ul class="sub-menu">
                             <li>
-                                <a onclick="xadmin.add_tab('订单列表','order-list.html')">
+                                <a onclick="xadmin.add_tab('房间订单列表','../order/queryPageRoomOrders')">
                                     <i class="iconfont">&#xe6a7;</i>
-                                    <cite>订单列表</cite></a>
+                                    <cite>房间订单列表</cite></a>
+                            </li>
+                            <li>
+                                <a onclick="xadmin.add_tab('菜品订单列表','../order/queryPageFoodOrders')">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>菜品订单列表</cite></a>
                             </li>
                             <li>
                                 <a href="javascript:;">
@@ -84,17 +89,12 @@
                                     <i class="iconfont nav_right">&#xe697;</i></a>
                                 <ul class="sub-menu">
                                     <li>
-                                        <a onclick="xadmin.add_tab('日订单统计','member-del.html')">
-                                            <i class="iconfont">&#xe6a7;</i>
-                                            <cite>日订单统计</cite></a>
-                                    </li>
-                                    <li>
-                                        <a onclick="xadmin.add_tab('周订单统计','member-list1.html')">
+                                        <a onclick="xadmin.add_tab('周订单统计','../chart/weekChart')">
                                             <i class="iconfont">&#xe6a7;</i>
                                             <cite>周订单统计</cite></a>
                                     </li>
                                     <li>
-                                        <a onclick="xadmin.add_tab('月订单统计','member-list1.html')">
+                                        <a onclick="xadmin.add_tab('月订单统计','../chart/monthChart')">
                                             <i class="iconfont">&#xe6a7;</i>
                                             <cite>月订单统计</cite></a>
                                     </li>
@@ -148,73 +148,26 @@
                         </ul>
                     </li>
                     <%-- 管理员管理  --%>
-                    <li>
-                        <a href="javascript:;">
-                            <i class="iconfont left-nav-li" lay-tips="管理员管理">&#xe726;</i>
-                            <cite>管理员管理</cite>
-                            <i class="iconfont nav_right">&#xe697;</i></a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a onclick="xadmin.add_tab('管理员列表','../admin/getAdminList')">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>管理员列表</cite></a>
-                            </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('角色管理','../admin/getAdminRole')">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>角色管理</cite></a>
-                            </li>
-                        </ul>
-                    </li>
-                    <%--  系统统计  --%>
-                    <li>
-                        <a href="javascript:;">
-                            <i class="iconfont left-nav-li" lay-tips="系统统计">&#xe6ce;</i>
-                            <cite>系统统计</cite>
-                            <i class="iconfont nav_right">&#xe697;</i></a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a onclick="xadmin.add_tab('拆线图','echarts1.html')">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>拆线图</cite></a>
-                            </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('拆线图','echarts2.html')">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>拆线图</cite></a>
-                            </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('地图','echarts3.html')">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>地图</cite></a>
-                            </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('饼图','echarts4.html')">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>饼图</cite></a>
-                            </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('雷达图','echarts5.html')">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>雷达图</cite></a>
-                            </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('k线图','echarts6.html')">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>k线图</cite></a>
-                            </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('热力图','echarts7.html')">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>热力图</cite></a>
-                            </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('仪表图','echarts8.html')">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>仪表图</cite></a>
-                            </li>
-                        </ul>
-                    </li>
+                    <c:if test="${sessionScope.loginUser.type == 0}">
+                        <li>
+                            <a href="javascript:;">
+                                <i class="iconfont left-nav-li" lay-tips="管理员管理">&#xe726;</i>
+                                <cite>管理员管理</cite>
+                                <i class="iconfont nav_right">&#xe697;</i></a>
+                            <ul class="sub-menu">
+                                <li>
+                                    <a onclick="xadmin.add_tab('管理员列表','../admin/getAdminList')">
+                                        <i class="iconfont">&#xe6a7;</i>
+                                        <cite>管理员列表</cite></a>
+                                </li>
+                                <li>
+                                    <a onclick="xadmin.add_tab('角色管理','../admin/getAdminRole')">
+                                        <i class="iconfont">&#xe6a7;</i>
+                                        <cite>角色管理</cite></a>
+                                </li>
+                            </ul>
+                        </li>
+                    </c:if>
                 </ul>
             </div>
         </div>

@@ -91,4 +91,16 @@ public class RoomServiceImpl implements RoomService {
         Integer i = roomMapper.updateRoom(room);
         return i;
     }
+
+    @Override
+    public Integer updateRstatusById(Integer rno) {
+        Integer i= roomMapper.updateRstatusById(rno);
+        return i;
+    }
+
+    @Override
+    public Integer modifyRstatusById(Integer rno) {
+        Integer i= roomMapper.modifyRstatusById(rno);
+        return i;
+    }
 }

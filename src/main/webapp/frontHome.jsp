@@ -49,10 +49,10 @@
             <a href="#"><button type="button" class="layui-btn layui-btn-radius" onclick="verifyUser('${sessionScope.loginUser.id}',1)" style="width: 136px;height: 50px;font-size: medium">我要入住</button></a>
             <a href="#"><button type="button" class="layui-btn layui-btn-radius" onclick="verifyUser('${sessionScope.loginUser.id}',2)" style="width: 136px;height: 50px;font-size: medium">我的订单</button></a>
             <br><br><br>
-            <a href="#"><button type="button" class="layui-btn layui-btn-radius" onclick="verifyUser('${sessionScope.loginUser.id}',3)" style="width: 136px;height: 50px;font-size: medium">退租</button></a>
-            <a href="#"><button type="button" class="layui-btn layui-btn-radius" onclick="verifyUser('${sessionScope.loginUser.id}',4)" style="width: 136px;height: 50px;font-size: medium">续租</button></a>
+            <a href="#"><button type="button" class="layui-btn layui-btn-radius" onclick="verifyUserAndRoom('${sessionScope.loginUser.id}',1)" style="width: 136px;height: 50px;font-size: medium">退租</button></a>
+            <a href="#"><button type="button" class="layui-btn layui-btn-radius" onclick="verifyUserAndRoom('${sessionScope.loginUser.id}',2)" style="width: 136px;height: 50px;font-size: medium">续租</button></a>
             <br><br><br>
-            <a href="#"><button type="button" class="layui-btn layui-btn-radius" onclick="verifyUser('${sessionScope.loginUser.id}',5)" style="width: 136px;height: 50px;font-size: medium">点餐</button></a>
+            <a href="#"><button type="button" class="layui-btn layui-btn-radius" onclick="verifyUser('${sessionScope.loginUser.id}',3)" style="width: 136px;height: 50px;font-size: medium">点餐</button></a>
             <a href="${ctx}/Home/toGetHotelInfo"><button type="button" class="layui-btn layui-btn-radius" style="width: 136px;height: 50px;font-size: medium">酒店信息</button></a>
         </div>
     </div>
@@ -85,24 +85,41 @@
         }
         //点击我的订单
         if (menu == 2){
-            window.location.href = contextPath + "/Home/goRoomList";
-            return;
-        }
-        //点击退租
-        if (menu == 3){
-            window.location.href = contextPath + "/Home/goRoomList";
-            return;
-        }
-        //点击续租
-        if (menu == 4){
-            window.location.href = contextPath + "/Home/goRoomList";
+            window.location.href = contextPath + "/order/queryMyOrder?userId="+id;
             return;
         }
         //点击点餐
-        if (menu == 5){
+        if (menu == 3){
             window.location.href = contextPath + "/food/getFoodList";
             return;
         }
+    }
+
+    function verifyUserAndRoom(id,menu){
+        if (id == null || id == ""){
+            layer.confirm('需要先登录哦',{
+                btn: ['去登录'] //可以无限个按钮
+            },function(){
+                window.location.href = contextPath + "/Login/toLogin";
+            });
+            return;
+        }
+
+        $.ajax({
+            url: contextPath + "/order/verifyRoomOrder",
+            method: 'post',
+            data: {
+                id: id
+            },
+            success(jsonStr){
+                var result = eval("("+jsonStr+")");
+                if (result.status == 1) {
+                    layer.alert(result.message, {icon: 6});
+                } else {
+                    location.href = contextPath + "/order/queryRoomOrder?id="+id+"&menu="+menu;
+                }
+            }
+        })
     }
 
     //轮播图实现

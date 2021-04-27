@@ -12,14 +12,6 @@
 <%@include file="../common/common.jsp"%>
 <body>
 <%@include file="../common/header.jsp"%>
-<%--右上角添加至购物车--%>
-<div id="stickyOrder">
-    <i class="layui-icon layui-icon-cart" id="shoppingCart"></i>
-    <span id="cartItem">(0)</span>
-    <a href="#">
-        <button class="layui-btn layui-btn-lg" type="button" id="toPayButton">去支付</button>
-    </a>
-</div>
 <%--餐品展示及选餐--%>
 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
     <legend>选餐</legend>
@@ -35,7 +27,7 @@
                 <i class="layui-icon layui-icon-rate" style="font-size: 20px;position: absolute;top: 110px;left: calc(115px + 20*${i+1}px);"></i>
             </c:forEach>
             <span>${food.name}&nbsp;&nbsp;￥${food.price}</span>
-            <button class="layui-btn layui-btn-lg layui-btn-danger" onclick="preOrder();">预订</button>
+            <button class="layui-btn layui-btn-lg layui-btn-danger" onclick="xadmin.open('订单信息','../order/toOrderFood?id='+${food.id},600,520)">预订</button>
         </a>
     </c:forEach>
 </div>
