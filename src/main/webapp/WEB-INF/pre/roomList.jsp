@@ -14,7 +14,6 @@
 <%@include file="../common/header.jsp"%>
 <%--  查询条件  --%>
 <form class="layui-form" method="post" action="${ctx}/Home/queryLikeRoom">
-    <input hidden value="${menu}" name="id">
     <br><br>
     <span style="margin-left: 60px;font-size: x-large;color: #1dc8cd">房间筛选</span>
     <div class="layui-inline">

@@ -54,16 +54,9 @@ public class HomeController {
     public String queryLikeRoom(@RequestParam("floor") Integer floor,
                                 @RequestParam("status") String status,
                                 @RequestParam("style") String style,
-                                @RequestParam("id") Integer id,
                                 Model model){
         List<Room> roomList = roomService.queryLikeRoom(floor, status, style);
         model.addAttribute("roomList",roomList);
-        if (id == 1){
-            model.addAttribute("menu",1);
-        }
-        if (id == 2){
-            model.addAttribute("menu",2);
-        }
         return "pre/roomList";
     }
 }
